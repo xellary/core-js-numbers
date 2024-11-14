@@ -226,8 +226,12 @@ function isPrime(n) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  const num = Number(value);
+  if (Number.isNaN(num)) {
+    return def;
+  }
+  return num;
 }
 
 /**
@@ -258,8 +262,19 @@ function getCube(num) {
  *   3  => 2
  *   10 => 55
  */
-function getFibonacciNumber(/* index */) {
-  throw new Error('Not implemented');
+function getFibonacciNumber(index) {
+  if (index === 0) return 0;
+  if (index === 1) return 1;
+
+  let firstElement = 0;
+  let secondElement = 1;
+  for (let i = 2; i <= index; i += 1) {
+    [firstElement, secondElement] = [
+      secondElement,
+      firstElement + secondElement,
+    ];
+  }
+  return secondElement;
 }
 
 /**
@@ -273,8 +288,12 @@ function getFibonacciNumber(/* index */) {
  *   10 => 55 // (1+2+3+...+10)
  *   1  => 1
  */
-function getSumToN(/* n */) {
-  throw new Error('Not implemented');
+function getSumToN(n) {
+  let sum = 0;
+  for (let i = 1; i <= n; i += 1) {
+    sum += i;
+  }
+  return sum;
 }
 
 /**
@@ -288,8 +307,12 @@ function getSumToN(/* n */) {
  *   202 => 4  // (2+0+2)
  *   5   => 5  // 5
  */
-function getSumOfDigits(/* num */) {
-  throw new Error('Not implemented');
+function getSumOfDigits(num) {
+  let sum = 0;
+  for (let i = 0; i <= num.toString().length - 1; i += 1) {
+    sum += Number(num.toString().charAt(i));
+  }
+  return sum;
 }
 
 /**
@@ -303,8 +326,15 @@ function getSumOfDigits(/* num */) {
  *   16  => true
  *   15  => false
  */
-function isPowerOfTwo(/* num */) {
-  throw new Error('Not implemented');
+function isPowerOfTwo(num) {
+  let remainder = num;
+  while (remainder > 1) {
+    remainder /= 2;
+  }
+  if (remainder === 1) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -546,8 +576,9 @@ function getIntegerPartNumber(number) {
  * 1, 2, 3       => 6
  * 0.1, 0.2, 0.3 => 0.6
  */
-function getSumOfNumbers(/* x1, x2, x3 */) {
-  throw new Error('Not implemented');
+function getSumOfNumbers(x1, x2, x3) {
+  const precision = 10;
+  return (x1 * precision + x2 * precision + x3 * precision) / precision;
 }
 
 /**
@@ -609,8 +640,14 @@ function getHypotenuse(a, b) {
  * 10 => 5
  * 15 => 8
  */
-function getCountOfOddNumbers(/* number */) {
-  throw new Error('Not implemented');
+function getCountOfOddNumbers(number) {
+  let count = 0;
+  for (let i = 1; i <= Math.abs(number); i += 1) {
+    if (i % 2 === 1) {
+      count += 1;
+    }
+  }
+  return count;
 }
 
 module.exports = {
